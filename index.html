@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversion Tool</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* Container with padding and a light background */
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            margin-top: 50px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Heading styling */
+
+        h1 {
+            color: #333;
+        }
+
+        /* Paragraph styling */
+
+        p {
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* Result styling */
+
+        .result {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        /* Invalid input message */
+
+        .invalid {
+            color: red;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Weight Conversion Tool</h1>
+    <p>Result</p>
+
+    <script>
+        // Function to convert kg to lb
+        function convertKgToLb(kg) {
+            return kg / 0.45359237;
+        }
+
+        // Function to convert lb to kg
+        function convertLbToKg(lb) {
+            return lb * 0.45359237;
+        }
+
+        let userChoice;
+
+        do {
+            // Prompt user for the action (kg to lb, lb to kg, or exit)
+            userChoice = prompt("Input 1 for converting kg to lb, or input 2 for converting lb to kg, or input 3 to exit.");
+
+            // Check if input is valid (1, 2, or 3)
+            if (userChoice != 1 && userChoice != 2 && userChoice != 3) {
+                document.write("<p class='invalid'>Invalid input. Please enter 1, 2, or 3 only.</p>");
+            }
+        } while (userChoice != 1 && userChoice != 2 && userChoice != 3);
+
+        if (userChoice != 3) {
+            let value;
+            let validInput = false;
+
+            do {
+                // Prompt for numeric input based on user choice
+                value = prompt("Enter the numeric value to convert:");
+
+                // Check if the input is a valid number
+                if (!isNaN(value) && value !== null && value !== "") {
+                    validInput = true;
+                } else {
+                    document.write("<p class='invalid'>Please enter a valid numeric value.</p>");
+                }
+            } while (!validInput);
+
+            // Convert the input to a number (float)
+            value = parseFloat(value);
+
+            // Perform the conversion based on user choice
+            switch (userChoice) {
+                case "1":  // Convert kg to lb
+                    let lbResult = convertKgToLb(value);
+                    document.write("<p class='result'>" + value + " kg is equal to " + lbResult.toFixed(2) + " lb.</p>");
+                    break;
+                case "2":  // Convert lb to kg
+                    let kgResult = convertLbToKg(value);
+                    document.write("<p class='result'>" + value + " lb is equal to " + kgResult.toFixed(2) + " kg.</p>");
+                    break;
+            }
+        } else {
+            document.write("<p class='result'>You have exited the application. No conversion performed.</p>");
+        }
+    </script>
+</div>
+
+</body>
+</html>
